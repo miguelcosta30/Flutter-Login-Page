@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget form(String text, Icon icon, context, bool validator,
@@ -13,6 +12,7 @@ Widget form(String text, Icon icon, context, bool validator,
         color: Colors.white,
         boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)]),
     child: TextField(
+      obscureText: handler == 'password' ? true : false,
       controller: _emailController,
       decoration: InputDecoration(
           hintText: validator ? null : text,
@@ -32,11 +32,11 @@ String? _validationHandler(String handler, String value) {
     case "password":
       return validatePassword(value);
   }
+  return null;
 }
 
 String? validateEmail(String value) {
   if (value.isEmpty) {
-    print("test");
     return "Email can't be empty";
   }
   if (checkEmail(value) == false) {
@@ -46,7 +46,6 @@ String? validateEmail(String value) {
 }
 
 String? validatePassword(String value) {
-  print(value.length);
   if (value.isEmpty) {
     return "Password can't be empty";
   }
